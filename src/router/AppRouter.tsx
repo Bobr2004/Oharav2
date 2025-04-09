@@ -7,20 +7,33 @@ import { NotFoundPage } from "~/pages/NotFoundPage";
 import { AdminRoutes } from "./AdminRoutes";
 import { UploadPage } from "~/pages/AdminPages/UploadPage/UploadPage";
 import { BooksPage } from "~/pages/AdminPages/BooksPage/BooksPage";
-import { DashboardPage } from "~/pages/AdminPages/DashboardPage/DashboardPage"
+import { DashboardPage } from "~/pages/AdminPages/DashboardPage/DashboardPage";
 import { UsersPage } from "~/pages/AdminPages/UsersPage/UsersPage";
+import { ReadApp } from "~/pages/ReadApp/ReadApp";
 
 function AppRouter() {
    return (
       <BrowserRouter>
          <Routes>
-            <Route path={routes.home} element={<Layout />}>
+            <Route element={<Layout />}>
                <Route index path={routes.home} element={<HomePage />} />
                <Route path={routes.login} element={<LoginPage />} />
                {/* <Route path={} element={}/> */}
 
                <Route path={routes.admin} element={<AdminRoutes />}>
-                  <Route index element={<h1>Admin panel</h1>} />
+                  <Route
+                     index
+                     element={
+                        <>
+                           <h1 className="text-center mt-4">Admin panel</h1>
+                           <p className="text-(--gray-10) w-[40ch] mx-auto mt-4">
+                              Manage users, books, and reading activity with
+                              ease. The admin panel gives you full control over
+                              content, progress tracking, and app settings.
+                           </p>
+                        </>
+                     }
+                  />
                   <Route path={routes.upload} element={<UploadPage />} />
                   <Route path={routes.books} element={<BooksPage />} />
                   <Route path={routes.dashboard} element={<DashboardPage />} />
@@ -29,6 +42,8 @@ function AppRouter() {
 
                <Route path="*" element={<NotFoundPage />} />
             </Route>
+
+            <Route path="read/:id" element={<ReadApp />} />
          </Routes>
       </BrowserRouter>
    );

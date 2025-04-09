@@ -13,11 +13,7 @@ function App() {
          "currentUser",
          currentUser ? JSON.stringify(currentUser) : ""
       );
-
-      console.log(currentUser);
    }, [currentUser]);
-
-   console.log(currentUser);
 
    return (
       <>

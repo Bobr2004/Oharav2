@@ -5,6 +5,9 @@ export const routes = {
    login: "/login",
    saved: "/saved",
 
+   // Read
+   read: (bookId: string) => `/read/${bookId}`,
+
    // admin
    admin: "/admin",
    upload: "/admin/upload",

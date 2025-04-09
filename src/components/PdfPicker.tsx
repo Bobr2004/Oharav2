@@ -4,7 +4,7 @@ type FileInputProps = {
    setFileState: (file: File) => void;
 };
 
-function FilePicker({ setFileState }: FileInputProps) {
+function PdfPicker({ setFileState }: FileInputProps) {
    const [file, setfile] = useState<File | null>(null);
 
    const fileSrcCopy = useMemo(
@@ -57,4 +57,4 @@ function FilePicker({ setFileState }: FileInputProps) {
    );
 }
 
-export { FilePicker };
+export { PdfPicker };

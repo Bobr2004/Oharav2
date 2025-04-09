@@ -25,8 +25,8 @@ function LoginPage() {
             Welcome to Ohara <b className="text-(--accent-10)">Math</b>
          </h1>
          <p className="containerX text-center mt-2">
-            Sign in below (model will be able to integrate into your workflow
-            directly)
+            Sign in below (To store books on your device, upload them, and save
+            your reading progress)
          </p>
          <section className="containerX mt-6">
             <div className="flex justify-center">

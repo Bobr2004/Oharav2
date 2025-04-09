@@ -73,24 +73,27 @@ function Layout() {
                               }
                               content={
                                  <div className="flex flex-col gap-2">
-                                    <NavLink
-                                       to={routes.admin}
-                                       className="flex justify-center"
-                                    >
-                                       <Button variant="ghost" color="gray">
-                                          Admin panel
-                                       </Button>
-                                    </NavLink>
+                                    {currentUser.email ===
+                                       "shovkopliasbohdan@gmail.com" && (
+                                       <NavLink
+                                          to={routes.admin}
+                                          className="flex justify-center"
+                                       >
+                                          <Button variant="ghost" color="gray">
+                                             Admin panel
+                                          </Button>
+                                       </NavLink>
+                                    )}
                                     <Button variant="ghost" color="gray">
-                                       Continue <i className="pi pi-history"/>
+                                       Continue <i className="pi pi-history" />
                                     </Button>
                                     <Button
                                        variant="ghost"
-                                       color="gray"
+                                       color="red"
                                        onClick={() => handleLogOut()}
                                        loading={isPending}
                                     >
-                                       Log out <i className="pi pi-sign-out"/>
+                                       Log out <i className="pi pi-sign-out" />
                                     </Button>
                                  </div>
                               }
