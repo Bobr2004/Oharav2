@@ -38,31 +38,41 @@ button:not([data-disabled="true"]) {
 /* Predefined typography tags styles */
 
 h1 {
-   @apply text-3xl font-bold font-Montserrat;
+   font-size: var(--text-3xl);
+   line-height: var(--tw-leading, var(--text-3xl--line-height));
+   font-weight: 700;
+   font-family: "Montserrat", sans-serif;
 }
 
 h2 {
-   @apply text-2xl font-bold font-Montserrat;
+   font-size: var(--text-2xl);
+   line-height: var(--tw-leading, var(--text-2xl--line-height));
+   font-weight: 700;
+   font-family: "Montserrat", sans-serif;
 }
 
 h3 {
-   @apply text-xl font-semibold;
+   font-size: var(--text-xl);
+   line-height: var(--tw-leading, var(--text-xl--line-height));
+   font-weight: 600;
+   font-family: "Montserrat", sans-serif;
 }
 
 b {
-   @apply font-bold;
+   font-weight: 700;
 }
 
 em {
-   @apply italic;
+   font-style: italic;
 }
 
 u {
-   @apply underline;
+   text-decoration: underline;
 }
 
 small {
-   @apply text-sm;
+   font-size: var(--text-sm);
+   line-height: var(--tw-leading, var(--text-sm--line-height));
 }
 
 /* Custom tailwind shortcuts */

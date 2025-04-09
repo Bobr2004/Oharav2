@@ -1,9 +1,25 @@
-import { Avatar, Button, Kbd } from "@radix-ui/themes";
-import toast from "react-hot-toast";
-import { NavLink, Outlet } from "react-router";
+import { Avatar, Button } from "@radix-ui/themes";
+import { useAtom } from "jotai";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import { routes } from "~/global/config/routes.config";
+import { currentUserAtom } from "~/store/atoms";
+import { Popup } from "./Popup";
+import { useMutation } from "@tanstack/react-query";
+import { logOut } from "~/global/firebaseFunctions/auth";
 
 function Layout() {
+   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
+
+   const navigate = useNavigate();
+
+   const { mutate: handleLogOut, isPending } = useMutation({
+      mutationFn: logOut,
+      onSuccess: () => {
+         setCurrentUser(null);
+         navigate(routes.login);
+      }
+   });
+
    return (
       <>
          <header className="bg-(--gray-2) border-b border-(--gray-6)">
@@ -23,18 +39,6 @@ function Layout() {
 
                <ul className="flex gap-4 items-center">
                   <li>
-                     <NavLink to={routes.admin} className="flex items-center">
-                        <Button
-                           disabled
-                           variant="ghost"
-                           color="gray"
-                           className="!text-xl"
-                        >
-                           <i className="pi pi-file-edit" />
-                        </Button>
-                     </NavLink>
-                  </li>
-                  <li>
                      <NavLink to={routes.saved} className="flex items-center">
                         <Button
                            variant="ghost"
@@ -46,26 +50,52 @@ function Layout() {
                      </NavLink>
                   </li>
                   <li className="ml-2">
-                     {true ? (
+                     {!currentUser ? (
                         <NavLink
                            to={routes.login}
                            className="flex items-center"
                         >
                            <Button variant="soft" color="gray">
-                              Login/Sign up
+                              Log in/Sign up
                            </Button>
                         </NavLink>
                      ) : (
-                        <NavLink to={routes.profile}>
-                           <Button
-                              variant="ghost"
-                              color="gray"
-                              className="!text-lg !p-1"
-                              radius="full"
-                           >
-                              <Avatar fallback="A" />
-                           </Button>
-                        </NavLink>
+                        <>
+                           <Popup
+                              trigger={
+                                 <Button variant="ghost" color="gray">
+                                    <Avatar
+                                       src={currentUser.photoURL}
+                                       size="2"
+                                       fallback={currentUser.name.slice(0, 1)}
+                                    />
+                                 </Button>
+                              }
+                              content={
+                                 <div className="flex flex-col gap-2">
+                                    <NavLink
+                                       to={routes.admin}
+                                       className="flex justify-center"
+                                    >
+                                       <Button variant="ghost" color="gray">
+                                          Admin panel
+                                       </Button>
+                                    </NavLink>
+                                    <Button variant="ghost" color="gray">
+                                       Continue <i className="pi pi-history"/>
+                                    </Button>
+                                    <Button
+                                       variant="ghost"
+                                       color="gray"
+                                       onClick={() => handleLogOut()}
+                                       loading={isPending}
+                                    >
+                                       Log out <i className="pi pi-sign-out"/>
+                                    </Button>
+                                 </div>
+                              }
+                           />
+                        </>
                      )}
                   </li>
                </ul>

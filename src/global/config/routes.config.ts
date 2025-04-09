@@ -1,9 +1,14 @@
 export const routes = {
    home: "/",
 
+   // Users
    login: "/login",
-   profile: "/profile",
-   upload: "/upload",
    saved: "/saved",
-   admin: "/admin"
+
+   // admin
+   admin: "/admin",
+   upload: "/admin/upload",
+   books: "/admin/books",
+   dashboard: "/admin/dashboard",
+   users: "/admin/users"
 };
